@@ -22,7 +22,7 @@ namespace LibraryDBGuiApplication
         public MainWindow()
         {
             InitializeComponent();
-            AddCategoryToDatabase();
+            //AddCategoryToDatabase();
             GiveDataToGrid();
         }
 
