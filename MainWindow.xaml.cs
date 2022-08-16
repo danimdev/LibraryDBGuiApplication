@@ -19,6 +19,7 @@ namespace LibraryDBGuiApplication
 {
     public partial class MainWindow : Window
     {
+        public AddBookWindow abw = new();
 
         public MainWindow()
         {
@@ -39,7 +40,17 @@ namespace LibraryDBGuiApplication
 
         private void AddBookButton(object sender, RoutedEventArgs e)
         {
-
+            if (abw != null)
+            {
+                abw.Focus();
+                abw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                abw.Activate();
+                abw.Show();
+            }
+            else
+            {
+                abw = new AddBookWindow();
+            }
         }
 
 

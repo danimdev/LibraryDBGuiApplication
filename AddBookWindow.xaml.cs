@@ -11,17 +11,21 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LibraryDBGuiApplication;
+
 
 namespace LibraryDBGuiApplication
 {
-    /// <summary>
-    /// Interaction logic for AddBookWindow.xaml
-    /// </summary>
     public partial class AddBookWindow : Window
     {
         public AddBookWindow()
         {
             InitializeComponent();
+        }
+
+        private void AddBookToDBButton(object sender, RoutedEventArgs e)
+        {
+            //((MainWindow)Application.Current.MainWindow);
         }
     }
 }

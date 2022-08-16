@@ -16,7 +16,7 @@
                 <Label Content="CategoryName: "/>
                 <TextBox Width="179"/>
             </StackPanel>
-            <Button Content="Save"/>
+            <Button Content="Save" Click="AddBookToDBButton"/>
         </StackPanel>
     </Grid>
 </Window>
