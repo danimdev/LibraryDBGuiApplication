@@ -19,6 +19,7 @@ namespace LibraryDBGuiApplication
 {
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +35,11 @@ namespace LibraryDBGuiApplication
 
                 CategoryDataGrid.ItemsSource = query.ToList();
             }
+        }
+
+        private void AddBookButton(object sender, RoutedEventArgs e)
+        {
+
         }
 
 

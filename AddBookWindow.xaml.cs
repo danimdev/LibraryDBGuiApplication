@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace LibraryDBGuiApplication
 {
     /// <summary>
-    /// Interaction logic for AddCategoryWindow.xaml
+    /// Interaction logic for AddBookWindow.xaml
     /// </summary>
-    public partial class AddCategoryWindow : Window
+    public partial class AddBookWindow : Window
     {
-        public AddCategoryWindow()
+        public AddBookWindow()
         {
             InitializeComponent();
         }

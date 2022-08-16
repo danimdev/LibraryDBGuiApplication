@@ -16,11 +16,17 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="0" Grid.Column="1"/>
-
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
-            <Button Content="Add Book" Margin="10,30"/>
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="0" Grid.ColumnSpan="2"/>
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="1"/>
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Add Book" Margin="10,30" Click="AddBookButton"/>
             <Button Content="Edit Book" Margin="10,30"/>
+            <Button Content="Remove Books" Margin="10,30"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <Button Content="Add Category" Margin="5,10"/>
+            <Button Content="Remove Category" FontSize="10" Margin="5,0"/>
         </StackPanel>
         
         <DataGrid Grid.Row="1" Grid.Column="1" x:Name="CategoryDataGrid" VerticalAlignment="Top" HorizontalAlignment="Left"/>
