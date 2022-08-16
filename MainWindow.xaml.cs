@@ -30,7 +30,7 @@ namespace LibraryDBGuiApplication
         {
             using(var context = new LibraryDB())
             {
-                var query = from categories in context.categories select categories;
+                var query = from categories in context.books select categories;
 
                 CategoryDataGrid.ItemsSource = query.ToList();
             }
@@ -40,9 +40,9 @@ namespace LibraryDBGuiApplication
         //test add mathod
         //public void AddCategoryToDatabase()
         //{
-        //    using(var context = new LibraryDB())
+        //    using (var context = new LibraryDB())
         //    {
-        //        var category = new Category { CategoryName = "Drama"};
+        //        var category = new Category { CategoryName = "Drama" };
         //        context.Add(category);
         //        context.SaveChanges();
         //    }
