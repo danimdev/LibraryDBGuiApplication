@@ -115,10 +115,5 @@ namespace LibraryDBGuiApplication
         {
             acw = null;
         }
-
-        private void AddCategoryWindowOnClosed(object? sender, EventArgs e)
-        {
-            acw = null;
-        }
     }
 }
