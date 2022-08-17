@@ -16,6 +16,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <ComboBox x:Name="CategoryComboBox" Grid.Row="0" Grid.Column="0" Margin="10,40"/>
+
         <Border BorderBrush="Black" BorderThickness="2" Grid.Row="0" Grid.ColumnSpan="2"/>
         <Border BorderBrush="Black" BorderThickness="2" Grid.Row="1"/>
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">

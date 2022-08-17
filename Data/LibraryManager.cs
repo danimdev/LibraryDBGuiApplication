@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryDBGuiApplication.Data
 {
-    public class LibraryManager
+    public class LibraryManager : IDisposable
     {
         public void AddBook(string Bookname,string Categoryname)
         {
@@ -19,10 +19,21 @@ namespace LibraryDBGuiApplication.Data
             }
         }
 
-        public void AddCategory()
+        public void AddCategory(string categoryName)
         {
+            using(var db = new LibraryDB())
+            {
+                Category category = new Category();
+                category.CategoryName = categoryName;
 
+                db.Add(category);
+                db.SaveChanges();
+            }
         }
 
+        public void Dispose()
+        {
+            
+        }
     }
 }

@@ -2,6 +2,7 @@
 using LibraryDBGuiApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,23 @@ namespace LibraryDBGuiApplication
             InitializeComponent();
             //AddCategoryToDatabase();
             GiveDataToGrid();
+            FillComboBoxWithCategorys();
+        }
+
+        void FillComboBoxWithCategorys()
+        {
+            using(var context = new LibraryDB())
+            {
+                var query = from category in context.categories select category.CategoryName;
+
+                CategoryComboBox.ItemsSource = query.ToList();
+            }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            abw.Close();
+            base.OnClosing(e);
         }
 
         public void GiveDataToGrid()
@@ -50,6 +68,18 @@ namespace LibraryDBGuiApplication
             else
             {
                 abw = new AddBookWindow();
+            }
+        }
+
+        void RemoveAllElementsFromTable()
+        {
+            using(var context = new LibraryDB())
+            {
+                var query = from elements in context.categories select elements;
+
+                context.RemoveRange(query);
+
+                context.SaveChanges();
             }
         }
 
