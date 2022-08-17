@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using LibraryDBGuiApplication;
-
 
 namespace LibraryDBGuiApplication
 {
@@ -25,7 +24,14 @@ namespace LibraryDBGuiApplication
 
         private void AddBookToDBButton(object sender, RoutedEventArgs e)
         {
-            //((MainWindow)Application.Current.MainWindow);
+            
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true;
+            base.Hide();
+            base.OnClosing(e);
         }
     }
 }

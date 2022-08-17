@@ -21,13 +21,12 @@ namespace LibraryDBGuiApplication
 {
     public partial class MainWindow : Window
     {
-        public AddBookWindow? abw;
+        public AddBookWindow abw = new();
         public AddCategoryWindow? acw;
 
         public MainWindow()
         {
             InitializeComponent();
-            //AddCategoryToDatabase();
             GiveDataToGrid();
             FillComboBoxWithCategorys();
         }
@@ -54,23 +53,20 @@ namespace LibraryDBGuiApplication
 
         private void AddBookButton(object sender, RoutedEventArgs e)
         {
-            if (abw != null)
+            if (abw.IsActive)
             {
-                ShowWindow(abw);
+                return;
+            }
+            else if(abw == null)
+            {
+                abw = new AddBookWindow();
+                abw.Focus();
+                abw.Show();
             }
             else
             {
-                abw = new AddBookWindow();
-                ShowWindow(abw);
+                abw.Show();
             }
-        }
-
-        void ShowWindow(Window win)
-        {
-            win.Activate();
-            win.Focus();
-            win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            win.Show();
         }
 
         void RemoveAllElementsFromTable()
@@ -96,6 +92,7 @@ namespace LibraryDBGuiApplication
             else
             {
                 acw.Activate();
+                acw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             }
         }
 
@@ -103,17 +100,5 @@ namespace LibraryDBGuiApplication
         {
             acw = null;
         }
-
-
-        //test add mathod
-        //public void AddCategoryToDatabase()
-        //{
-        //    using (var context = new LibraryDB())
-        //    {
-        //        var category = new Category { CategoryName = "Drama" };
-        //        context.Add(category);
-        //        context.SaveChanges();
-        //    }
-        //}
     }
 }
