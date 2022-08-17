@@ -21,7 +21,7 @@ namespace LibraryDBGuiApplication
 {
     public partial class MainWindow : Window
     {
-        public AddBookWindow abw = new();
+        public AddBookWindow? abw;
         public AddCategoryWindow? acw;
 
         public MainWindow()
@@ -33,7 +33,7 @@ namespace LibraryDBGuiApplication
 
         void FillComboBoxWithCategorys()
         {
-            using(var context = new LibraryDB())
+            using (var context = new LibraryDB())
             {
                 var query = from category in context.categories select category.CategoryName;
 
@@ -41,9 +41,18 @@ namespace LibraryDBGuiApplication
             }
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if(acw != null)
+                acw.Close();
+            if (abw != null)
+                abw.Close();
+            base.OnClosing(e);
+        }
+
         public void GiveDataToGrid()
         {
-            using(var context = new LibraryDB())
+            using (var context = new LibraryDB())
             {
                 var query = from categories in context.books select categories;
 
@@ -53,25 +62,29 @@ namespace LibraryDBGuiApplication
 
         private void AddBookButton(object sender, RoutedEventArgs e)
         {
-            if (abw.IsActive)
-            {
-                return;
-            }
-            else if(abw == null)
+            if (abw == null)
             {
                 abw = new AddBookWindow();
-                abw.Focus();
+                abw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                abw.Activate();
+                abw.Closed += Abw_Closed;
                 abw.Show();
             }
-            else
+            else if (abw.IsActive)
             {
-                abw.Show();
+                abw.Focus();
+                return;
             }
+        }
+
+        private void Abw_Closed(object? sender, EventArgs e)
+        {
+            abw = null;
         }
 
         void RemoveAllElementsFromTable()
         {
-            using(var context = new LibraryDB())
+            using (var context = new LibraryDB())
             {
                 var query = from elements in context.categories select elements;
 
@@ -86,14 +99,21 @@ namespace LibraryDBGuiApplication
             if(acw == null)
             {
                 acw = new AddCategoryWindow();
-                acw.Closed += AddCategoryWindowOnClosed;
+                acw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                acw.Activate();
+                acw.Closed += AcwOnClosed;
                 acw.Show();
             }
-            else
+            else if (acw.IsActive)
             {
-                acw.Activate();
-                acw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                acw.Focus();
+                return;
             }
+        }
+
+        private void AcwOnClosed(object? sender, EventArgs e)
+        {
+            acw = null;
         }
 
         private void AddCategoryWindowOnClosed(object? sender, EventArgs e)

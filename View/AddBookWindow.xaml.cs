@@ -26,12 +26,5 @@ namespace LibraryDBGuiApplication
         {
             
         }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            e.Cancel = true;
-            base.Hide();
-            base.OnClosing(e);
-        }
     }
 }
