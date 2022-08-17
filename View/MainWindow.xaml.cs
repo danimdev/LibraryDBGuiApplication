@@ -1,5 +1,6 @@
 ﻿using LibraryDBGuiApplication.Data;
 using LibraryDBGuiApplication.Models;
+using LibraryDBGuiApplication.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,8 @@ namespace LibraryDBGuiApplication
 {
     public partial class MainWindow : Window
     {
-        public AddBookWindow abw = new();
+        public AddBookWindow? abw;
+        public AddCategoryWindow? acw;
 
         public MainWindow()
         {
@@ -40,12 +42,6 @@ namespace LibraryDBGuiApplication
             }
         }
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            abw.Close();
-            base.OnClosing(e);
-        }
-
         public void GiveDataToGrid()
         {
             using(var context = new LibraryDB())
@@ -60,15 +56,21 @@ namespace LibraryDBGuiApplication
         {
             if (abw != null)
             {
-                abw.Focus();
-                abw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                abw.Activate();
-                abw.Show();
+                ShowWindow(abw);
             }
             else
             {
                 abw = new AddBookWindow();
+                ShowWindow(abw);
             }
+        }
+
+        void ShowWindow(Window win)
+        {
+            win.Activate();
+            win.Focus();
+            win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            win.Show();
         }
 
         void RemoveAllElementsFromTable()
@@ -81,6 +83,25 @@ namespace LibraryDBGuiApplication
 
                 context.SaveChanges();
             }
+        }
+
+        private void AddCategoryButtonMainWindow(object sender, RoutedEventArgs e)
+        {
+            if(acw == null)
+            {
+                acw = new AddCategoryWindow();
+                acw.Closed += AddCategoryWindowOnClosed;
+                acw.Show();
+            }
+            else
+            {
+                acw.Activate();
+            }
+        }
+
+        private void AddCategoryWindowOnClosed(object? sender, EventArgs e)
+        {
+            acw = null;
         }
 
 

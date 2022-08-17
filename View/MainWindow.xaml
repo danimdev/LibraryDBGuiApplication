@@ -27,7 +27,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <Button Content="Add Category" Margin="5,10"/>
+            <Button Content="Add Category" Margin="5,10" Click="AddCategoryButtonMainWindow"/>
             <Button Content="Remove Category" FontSize="10" Margin="5,0"/>
         </StackPanel>
         
