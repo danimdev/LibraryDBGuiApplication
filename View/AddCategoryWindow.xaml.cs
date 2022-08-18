@@ -31,8 +31,17 @@ namespace LibraryDBGuiApplication.View
                 using (var libraryManager = new LibraryManager())
                 {
                     libraryManager.AddCategory(CategoryNameTextbox.Text);
+
+                    using (var context = new LibraryDB())
+                    {
+                        var query = from category in context.categories select category.CategoryName;
+
+                        ((MainWindow)Application.Current.MainWindow).CategoryComboBox.ItemsSource = query.ToList();
+                    }
                 }
             }
+
+            base.Close();
         }
     }
 }

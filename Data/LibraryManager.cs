@@ -16,6 +16,9 @@ namespace LibraryDBGuiApplication.Data
                 Book book = new Book();
                 book.Name = Bookname;
                 book.Category = Categoryname;
+
+                db.Add(book);
+                db.SaveChanges();
             }
         }
 

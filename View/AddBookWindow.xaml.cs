@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibraryDBGuiApplication.Data;
+using LibraryDBGuiApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,11 +22,39 @@ namespace LibraryDBGuiApplication
         public AddBookWindow()
         {
             InitializeComponent();
+            FillComboboxWithCurrentCategories();
+        }
+
+        void FillComboboxWithCurrentCategories()
+        {
+            using(var context = new LibraryDB())
+            {
+                var query = from categories in context.categories select categories.CategoryName;
+
+                CategoryComboboxSelection.ItemsSource = query.ToList();
+            }
         }
 
         private void AddBookToDBButton(object sender, RoutedEventArgs e)
         {
-            
+            if (!String.IsNullOrEmpty(CategoryComboboxSelection.SelectedItem.ToString()) && !String.IsNullOrEmpty(BooknameTextbox.Text))
+            {
+                using (var data = new LibraryManager())
+                {
+                    Book newBook = new Book();
+                    newBook.Name = BooknameTextbox.Text;
+                    newBook.Category = CategoryComboboxSelection.SelectedItem.ToString();
+
+                    data.AddBook(newBook.Name,newBook.Category);
+
+                    base.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Something happend");
+                base.Close();
+            }
         }
     }
 }
