@@ -34,6 +34,16 @@ namespace LibraryDBGuiApplication.Data
             }
         }
 
+        public Book[] UpdateBooks()
+        {
+            using(var db = new LibraryDB())
+            {
+                var query = from book in db.books select book;
+
+                return query.ToArray();
+            }
+        }
+
         public void Dispose()
         {
             

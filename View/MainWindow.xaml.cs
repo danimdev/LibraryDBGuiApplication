@@ -21,6 +21,7 @@ namespace LibraryDBGuiApplication
 {
     public partial class MainWindow : Window
     {
+
         public AddBookWindow? abw;
         public AddCategoryWindow? acw;
 
@@ -29,6 +30,11 @@ namespace LibraryDBGuiApplication
             InitializeComponent();
             GiveDataToGrid();
             FillComboBoxWithCategorys();
+
+            using(var Library = new LibraryManager())
+            {
+                CategoryDataGrid.ItemsSource = Library.UpdateBooks();
+            }
         }
 
         void FillComboBoxWithCategorys()

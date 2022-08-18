@@ -52,7 +52,6 @@ namespace LibraryDBGuiApplication
             }
             else
             {
-                MessageBox.Show("Something happend");
                 base.Close();
             }
         }
