@@ -9,9 +9,9 @@ namespace LibraryDBGuiApplication.Data
 {
     public class LibraryManager : IDisposable
     {
-        public void AddBook(string Bookname,string Categoryname)
+        public void AddBook(string Bookname, string Categoryname)
         {
-            using(var db = new LibraryDB())
+            using (var db = new LibraryDB())
             {
                 Book book = new Book();
                 book.Name = Bookname;
@@ -24,7 +24,7 @@ namespace LibraryDBGuiApplication.Data
 
         public void AddCategory(string categoryName)
         {
-            using(var db = new LibraryDB())
+            using (var db = new LibraryDB())
             {
                 Category category = new Category();
                 category.CategoryName = categoryName;
@@ -36,7 +36,7 @@ namespace LibraryDBGuiApplication.Data
 
         public Book[] UpdateBooks()
         {
-            using(var db = new LibraryDB())
+            using (var db = new LibraryDB())
             {
                 var query = from book in db.books select book;
 
@@ -44,9 +44,31 @@ namespace LibraryDBGuiApplication.Data
             }
         }
 
+        public void EditBook(int id, string Bookname, string Categoryname)
+        {
+            if (!String.IsNullOrEmpty(Bookname) || !String.IsNullOrEmpty(Categoryname))
+            {
+                using (var db = new LibraryDB())
+                {
+                    var book = db.books.Find(id);
+                    if (book != null)
+                    {
+                        book.Name = Bookname;
+                        book.Category = Categoryname;
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
         public void Dispose()
         {
-            
+
         }
     }
 }
