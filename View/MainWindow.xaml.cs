@@ -86,6 +86,7 @@ namespace LibraryDBGuiApplication
         private void Abw_Closed(object? sender, EventArgs e)
         {
             abw = null;
+            GiveDataToGrid();
         }
 
         void RemoveAllElementsFromTable()
@@ -120,6 +121,24 @@ namespace LibraryDBGuiApplication
         private void AcwOnClosed(object? sender, EventArgs e)
         {
             acw = null;
+        }
+
+        private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (CategoryComboBox.SelectedItem.ToString() != "All")
+            {
+                using (var context = new LibraryDB())
+                {
+                    var query = from category in context.books where category.Category == CategoryComboBox.SelectedItem.ToString() select category;
+
+                    CategoryDataGrid.ItemsSource = query.ToList();
+                }
+            }
+            else
+            {
+                GiveDataToGrid();
+            }
         }
     }
 }
