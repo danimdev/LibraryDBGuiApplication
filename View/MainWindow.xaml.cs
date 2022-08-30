@@ -24,6 +24,7 @@ namespace LibraryDBGuiApplication
 
         public AddBookWindow? abw;
         public AddCategoryWindow? acw;
+        public EditBookWindow? ebw;
 
         public MainWindow()
         {
@@ -139,6 +140,29 @@ namespace LibraryDBGuiApplication
             {
                 GiveDataToGrid();
             }
+        }
+
+        private void EditBookButton(object sender, RoutedEventArgs e)
+        {
+            if (ebw == null)
+            {
+                ebw = new EditBookWindow();
+                ebw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                ebw.Activate();
+                ebw.Closed += EbwOnClosed; ;
+                ebw.Show();
+            }
+            else if (ebw.IsActive)
+            {
+                ebw.Focus();
+                return;
+            }
+        }
+
+        private void EbwOnClosed(object? sender, EventArgs e)
+        {
+            ebw = null;
+            GiveDataToGrid();
         }
     }
 }

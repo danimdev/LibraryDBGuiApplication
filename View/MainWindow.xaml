@@ -22,7 +22,7 @@
         <Border BorderBrush="Black" BorderThickness="2" Grid.Row="1"/>
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="Add Book" Margin="10,30" Click="AddBookButton"/>
-            <Button Content="Edit Book" Margin="10,30"/>
+            <Button Content="Edit Book" Margin="10,30" Click="EditBookButton"/>
             <Button Content="Remove Books" Margin="10,30"/>
         </StackPanel>
 
